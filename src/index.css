@@ -1,0 +1,273 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Outfit', sans-serif; /* Modern premium font */
+  background: linear-gradient(135deg, #2b3044 0%, #151821 100%); /* Premium dark background */
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.screenApp {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.transition-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: black;
+  z-index: 9999;
+  animation: fadeInOverlay 0.4s forwards;
+  pointer-events: none;
+}
+
+@keyframes fadeInOverlay {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  max-width: 480px; 
+  background-color: #000;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+}
+
+/* On Desktop, make it look like a floating phone screen */
+@media (min-width: 481px) {
+  #root {
+    height: 85vh;
+    border-radius: 36px;
+    border: 8px solid #33394f;
+  }
+}
+
+.screen {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Character Select Screen overlaying the app */
+.character-select {
+  justify-content: center;
+  text-align: center;
+  background: url('/assets/background-day.png') no-repeat center bottom;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1.5rem;
+  z-index: 50;
+}
+
+/* Add a dark gradient over the bg so text is readable and it feels premium */
+.character-select::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(to bottom, rgba(0,180,210,0.4) 0%, rgba(255,255,255,0.1) 100%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.character-select h1 {
+  font-size: 3.2rem;
+  font-weight: 900;
+  margin-bottom: 0.2rem;
+  color: white;
+  letter-spacing: -1px;
+  text-shadow: 0 4px 15px rgba(0,0,0,0.3), 3px 3px 0 rgba(0,0,0,0.2);
+  animation: slideDown 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.character-select > p {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+  margin-bottom: 2.5rem;
+  animation: slideDown 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.1s forwards;
+  opacity: 0;
+}
+
+.character-cards {
+  display: flex;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.character-card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #1a1a1a;
+  padding: 1.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  width: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.6); 
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+  
+  /* Staggered animation */
+  animation: floatUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.character-card:nth-child(1) { animation-delay: 0.2s; }
+.character-card:nth-child(2) { animation-delay: 0.3s; }
+.character-card:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes floatUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.character-card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25), 0 0 20px rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.95);
+  border-color: #fff;
+}
+
+.character-card:active {
+  transform: translateY(-2px) scale(0.98);
+}
+
+.character-card img {
+  width: 80px;
+  height: 80px;
+  border-radius: 16px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease;
+}
+
+.img-wrapper {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin-bottom: 0.8rem;
+  border-radius: 16px;
+  padding: 3px;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.img-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+  border-radius: 16px;
+}
+
+.character-card:hover img {
+  transform: scale(1.08) rotate(-3deg);
+}
+
+.character-card h3 {
+  font-size: 1.1rem;
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+/* Game Canvas container */
+.game-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: #000; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; 
+  image-rendering: crisp-edges;
+  image-rendering: pixelated; 
+  touch-action: none; /* Crucial for mobile */
+}
+
+/* Beautiful back button overlayed on game canvas */
+.btn-back {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 100;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 30px;
+  cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: all 0.2s ease;
+}
+
+.btn-back:hover {
+  background: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+}
+
+.btn-back:active {
+  transform: translateY(1px);
+}
+
+.back-icon {
+  font-size: 1.2rem;
+  line-height: 1;
+}
