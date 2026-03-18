@@ -73,10 +73,6 @@ Bring your friends to life on your local machine:
 
 ---
 
-## 🌍 Deployment
-
-This project is optimized for **Vercel**. Simply push your repository to GitHub and connect it to Vercel for instant deployment.
-
 ---
 
 ## 📝 License
